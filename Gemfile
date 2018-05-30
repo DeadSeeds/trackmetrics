@@ -34,3 +34,5 @@ gem 'bootstrap-sass'
 gem 'figaro'
 # Devise for user authentication
 gem 'devise'
+# Pundit for user authorization
+gem 'pundit'

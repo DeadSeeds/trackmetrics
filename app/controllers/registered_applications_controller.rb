@@ -1,12 +1,15 @@
 class RegisteredApplicationsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @apps = RegisteredApplication.where(user_id: current_user.id)
+    authorize @apps
     @user = current_user
   end
 
   def show
     @app = RegisteredApplication.find(params[:id])
+    authorize @app
   end
 
   def new
@@ -30,11 +33,13 @@ class RegisteredApplicationsController < ApplicationController
   def edit
     @app = RegisteredApplication.find(params[:id])
     @app.user = current_user
+    authorize @app
   end
 
   def update
     @app = RegisteredApplication.find(params[:id])
     @app.assign_attributes(app_params)
+    authorize @app
 
     if @app.save
       flash[:notice] = "Application was saved."
@@ -60,7 +65,6 @@ class RegisteredApplicationsController < ApplicationController
   private
 
   def app_params
-    @user_id = current_user.id
     params.require(:registered_application).permit(:name, :url)
   end
 
