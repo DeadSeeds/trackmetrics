@@ -1,0 +1,26 @@
+<%= form_for app do |f| %>
+  <% if app.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>There were <%= pluralize(app.errors.count, "error") %> with your request:</h4>
+      <ul>
+        <% app.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <%= form_group_tag(app.errors[:name]) do %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control', placeholder: "Enter app name" %>
+    <% end %>
+    <%= form_group_tag(app.errors[:url]) do %>
+      <%= f.label :url %>
+      <%= f.text_field :url, rows: 1, class: 'form-control', placeholder: "Enter url" %>
+    <% end %>
+    <br>
+    <div class="form-group">
+      <%= f.submit "Save", class: 'btn btn-success'%>
+      <%= link_to "Cancel", landing_index_path, class: 'btn btn-info' %>
+      <%= link_to "Delete Post", [@app], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this app?'} %>
+    </div>
+<% end %>

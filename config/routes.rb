@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users
+
+  resources :registered_applications
+
   get 'landing/index'
 
   root 'landing#index'
