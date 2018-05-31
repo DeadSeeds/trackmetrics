@@ -1,7 +1,9 @@
 <div class="container-fluid">
-
-  <div class="row">
-  </div>
+  <% if current_user %>
+    <div class="row">
+      <%= link_to "Add Application", new_registered_application_path, class: 'btn-group btn-success btn-sm' %>
+    </div>
+  <% end %>
   <div class="jumbotron">
     <center><h1>TrackMetrics</h1></center>
     <center><h2>Track activity on the web.</h2></center>

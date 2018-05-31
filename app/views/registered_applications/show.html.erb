@@ -13,12 +13,23 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">URL</th>
+      <th scope="col">Event Names</th>
+      <th scope="col">Event Count</th>
     </tr>
   </thead>
 
   <tr>
     <td> <%= @app.name %> </td>
     <td> <%= @app.url %> </td>
+    <td>
+        <% @events.each do |key, value| %>
+          <%= key %>
+        <% end %>
+    </td>
+    <td>
+        <%= @events.count %>
+
+    </td>
   </tr>
 
 </div>

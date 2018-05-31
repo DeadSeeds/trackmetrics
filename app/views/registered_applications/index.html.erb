@@ -13,17 +13,19 @@
   <table class="table table-hover">
     <thead class="thead-light">
       <tr>
-        <th scope="col">Unique ID #</th>
+        <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">URL</th>
+        <th scope="col">Unique ID</th>
       </tr>
     </thead>
 
-    <% @apps.each do |app| %>
+    <% @apps.each_with_index do |app, index| %>
       <tr>
-        <th scope="row"> <%= app.id %> </th>
+        <th scope="row"> <%= index + 1 %> </th>
         <td> <%= link_to app.name, registered_application_path(app.id) %> </td>
         <td> <%= link_to app.url, registered_application_path(app.id) %> </td>
+        <td> <%= link_to app.id, registered_application_path(app.id) %> </td>
       </tr>
     <% end %>
 

@@ -4,12 +4,13 @@ class RegisteredApplicationsController < ApplicationController
   def index
     @apps = RegisteredApplication.where(user_id: current_user.id)
     authorize @apps
-    @user = current_user
+    # @user = current_user
   end
 
   def show
     @app = RegisteredApplication.find(params[:id])
     authorize @app
+    @events = @app.events.group_by(&:name)
   end
 
   def new
@@ -61,6 +62,7 @@ class RegisteredApplicationsController < ApplicationController
       flash.now[:alert] = "There was an error removing the application."
     end
   end
+
 
   private
 
