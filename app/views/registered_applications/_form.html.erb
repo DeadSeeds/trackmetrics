@@ -15,14 +15,16 @@
     <% end %>
     <%= form_group_tag(app.errors[:url]) do %>
       <%= f.label :url %>
-      <%= f.text_field :url, rows: 1, class: 'form-control', placeholder: "Enter url" %>
+      <%= f.text_field :url, rows: 1, class: 'form-control', placeholder: "Please enter a full URL (https://example.com)" %>
     <% end %>
     <br>
     <div class="form-group">
       <%= f.submit "Save", class: 'btn btn-success' %>
       <%= link_to "Cancel", registered_applications_path, class: 'btn btn-info' %>
       <div class="right-side">
-        <%= link_to "Delete App", [@app], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this app?  This can not be undone!'} %>
+        <% if @app.id %>
+          <%= link_to "Delete App", [@app], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this app?  This can not be undone!'} %>
+        <% end %>
       </div>
     </div>
 <% end %>
