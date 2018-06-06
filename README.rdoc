@@ -1,28 +1,22 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+TrackMetrics must be called with an AJAX request to the server-side API to create an "event" on
+the TrackMetrics server.  For example, the following code should be placed in the application.js
+file of a Rails server:
 
-Things you may want to cover:
+var trackmetrics ={};
+  trackmetrics.report = function(eventName){
+  var event = {event: { name: eventName}};
+  var request = new XMLHttpRequest();
+  request.open("POST", "http://localhost:3000/api/events", true);
+  request.setRequestHeader('Content-Type', 'application/json');
+  request.send(JSON.stringify(event));
+  }
 
-* Ruby version
+  The report function can then be called with an argument that will be passed on to TrackMetrics.
+  You can call it on a click event:
 
-* System dependencies
+  <a href="/landing" onclick="trackmetrics.report('landing page link clicked')">
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+  Or you can execute it when a page loads:
+  <script>trackmetrics.report('landing page loaded');</script>
