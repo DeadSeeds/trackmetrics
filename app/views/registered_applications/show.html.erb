@@ -1,5 +1,6 @@
-<div class="container-fluid">
+<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
 
+<div class="container-fluid">
 
   <nav class="navbar navbar-default navbar-show">
     <div class="container-fluid">
@@ -20,28 +21,34 @@
     </div>
   </nav>
 
-<table class="table">
-  <thead>
+
+  <div>
+    <%= pie_chart @app.events.group(:name).count %>
+  </div>
+  <div>
+    <%= line_chart @app.events.group_by_day(:created_at).count %>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">URL</th>
+        <th scope="col">Event Names</th>
+        <th scope="col">Event Count</th>
+      </tr>
+    </thead>
+
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">URL</th>
-      <th scope="col">Event Names</th>
-      <th scope="col">Event Count</th>
+      <td> <%= @app.name %> </td>
+      <td> <%= @app.url %> </td>
+      <td>
+          <% @events.each do |key, value| %>
+            <%= key + "." %>
+          <% end %>
+      </td>
+      <td>
+        <%= @event_count %>
+      </td>
     </tr>
-  </thead>
-
-  <tr>
-    <td> <%= @app.name %> </td>
-    <td> <%= @app.url %> </td>
-    <td>
-        <% @events.each do |key, value| %>
-          <%= key %>
-        <% end %>
-    </td>
-    <td>
-        <%= @events.count %>
-
-    </td>
-  </tr>
-
 </div>

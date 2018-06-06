@@ -36,3 +36,7 @@ gem 'figaro'
 gem 'devise'
 # Pundit for user authorization
 gem 'pundit'
+# Chartkic for graphs
+gem "chartkick"
+# Groupdate works with Chartkick for grouping
+gem 'groupdate'

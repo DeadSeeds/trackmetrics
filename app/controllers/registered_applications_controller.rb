@@ -10,6 +10,7 @@ class RegisteredApplicationsController < ApplicationController
     @app = RegisteredApplication.find(params[:id])
     authorize @app
     @events = @app.events.group_by(&:name)
+    @event_count = @app.events.group_by(&:id).count
   end
 
   def new
